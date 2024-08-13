@@ -4,8 +4,7 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 #include<IRremote.h>
 IRrecv ir(3);
 String x;
-void setup() {
-  // put your setup code here, to run once:
+void setup() { 
   Serial.begin(9600);
   pinMode(13,OUTPUT);
   pinMode(10,OUTPUT);
