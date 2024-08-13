@@ -1,0 +1,91 @@
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+#include<IRremote.h>
+IRrecv ir(3);
+String x;
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(13,OUTPUT);
+  pinMode(10,OUTPUT);
+  pinMode(11,OUTPUT);
+  lcd.begin();
+  lcd.backlight();
+  ir.enableIRIn();
+  
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  if(ir.decode()){
+    //Serial.println(ir.decodedIRData.decodedRawData, HEX );
+    //delay(1500);
+    ir.resume();  
+    x = (ir.decodedIRData.decodedRawData);
+    Serial.println(x);
+    if(x == "3125149440"){
+      lcd.clear();
+      Serial.println("I NEED WATER !");
+      lcd.print("I NEED WATER !");
+
+    }//1
+    else if(x =="3108437760"){
+      lcd.clear();
+      Serial.println("GIVE ME TABLETS ");
+      lcd.print("GIVE ME TABLETS ");
+    }//2
+    else if(x =="3091726080") {
+      lcd.clear();
+      Serial.println("RESTROOM ");
+      lcd.print("RESTROOM ");
+    }//3
+    else if(x == "3141861120"){
+      lcd.clear();
+      Serial.println("I NEED REST");
+      lcd.print("I NEED REST");
+    }//4
+    else if(x == "3208707840"){
+      lcd.clear();
+      Serial.println("I AM HUNGRY");
+      lcd.print("I AM HUNGRY");
+    }//5
+    else if(x == "3158572800"){
+      lcd.clear();
+      Serial.println("I FEEL PAIN"); 
+      lcd.print("I FEEL PAIN"); 
+    }//6
+    else if(x == "4144561920"){
+      lcd.clear();
+      Serial.println("LIGHT ON"); 
+      lcd.print("LIGHT ON"); 
+    }else if(x == "2774204160"){
+      lcd.clear();
+      Serial.println("LIGHT OFF"); 
+      lcd.print("LIGHT OFF"); 
+    }
+    else if(x == "3877175040"){
+      lcd.clear();
+      Serial.println("FAN ON"); 
+      lcd.print("FAN ON"); 
+    }
+    else if(x == "2907897600"){
+      lcd.clear();
+      Serial.println("FAN OFF"); 
+      lcd.print("FAN OFF"); 
+    }
+    else if(x == "3810328320"){
+      lcd.clear();
+      Serial.println("EMERGENCY"); 
+      lcd.print("EMERGENCY"); 
+    }
+    else if(x == "3860463360"){
+      lcd.clear();
+      Serial.println("RELAX"); 
+      lcd.print("RELAX");
+    }
+    else if(x == "3910598400"){
+      lcd.clear();
+    }
+  }
+}
